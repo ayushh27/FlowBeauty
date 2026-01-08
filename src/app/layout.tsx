@@ -16,6 +16,9 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Flow Beauty | Premium Cosmetics & Skincare",
   description: "Experience the flow of beauty with our curated collection of cosmetics and skincare products.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
