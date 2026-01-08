@@ -6,12 +6,13 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
 
 export default function CartPage() {
     const { items, removeItem, updateQuantity, clearCart } = useCart();
 
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const shipping = subtotal > 100 ? 0 : 10;
+    const shipping = subtotal > 1000 ? 0 : 100;
     const total = subtotal + shipping;
 
     if (items.length === 0) {
@@ -22,12 +23,18 @@ export default function CartPage() {
                         <ShoppingBag className="h-12 w-12 text-muted-foreground" />
                     </div>
                 </div>
-                <h1 className="text-3xl font-serif font-bold">Your cart is empty</h1>
-                <p className="text-muted-foreground max-w-md mx-auto">
-                    It looks like you haven't added any premium beauty products to your cart yet.
+                <motion.h1
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-4xl font-serif font-bold"
+                >
+                    Your cart is <span className="gradient-text">empty</span>
+                </motion.h1>
+                <p className="text-muted-foreground max-w-sm mx-auto text-lg font-light">
+                    It looks like you haven't added any premium beauty products to your bag yet.
                 </p>
-                <Button asChild className="rounded-full px-8">
-                    <Link href="/products">Continue Shopping</Link>
+                <Button asChild className="rounded-full px-12 h-14 text-lg bg-primary text-white shadow-xl hover:shadow-2xl transition-all">
+                    <Link href="/products">Discover Products</Link>
                 </Button>
             </div>
         );
@@ -66,41 +73,41 @@ export default function CartPage() {
                                             <Plus className="h-3 w-3" />
                                         </Button>
                                     </div>
-                                    <p className="font-bold text-primary">${(item.price * item.quantity).toFixed(2)}</p>
+                                    <p className="font-bold text-primary">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
                                 </div>
                             </div>
                         </div>
                     ))}
 
                     <div className="flex justify-between items-center pt-4">
-                        <Button variant="ghost" asChild>
+                        <Button variant="ghost" asChild className="rounded-full">
                             <Link href="/products">← Back to Shopping</Link>
                         </Button>
-                        <Button variant="ghost" onClick={clearCart} className="text-muted-foreground">
+                        <Button variant="ghost" onClick={clearCart} className="text-muted-foreground hover:text-destructive transition-colors">
                             Clear Cart
                         </Button>
                     </div>
                 </div>
 
-                <div className="bg-secondary/20 p-8 rounded-3xl h-fit space-y-6">
-                    <h2 className="text-2xl font-serif font-bold">Order Summary</h2>
+                <div className="bg-white/50 backdrop-blur-md p-8 rounded-[2.5rem] h-fit space-y-6 border border-primary/5 shadow-xl">
+                    <h2 className="text-2xl font-serif font-bold tracking-tight">Order Summary</h2>
 
                     <div className="space-y-4">
                         <div className="flex justify-between text-sm">
                             <span className="text-muted-foreground">Subtotal</span>
-                            <span>${subtotal.toFixed(2)}</span>
+                            <span className="font-medium">₹{subtotal.toLocaleString('en-IN')}</span>
                         </div>
                         <div className="flex justify-between text-sm">
-                            <span className="text-muted-foreground">Shipping</span>
-                            <span>{shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</span>
+                            <span className="text-muted-foreground">Estimate Shipping</span>
+                            <span className="font-medium">{shipping === 0 ? "FREE" : `₹${shipping.toLocaleString('en-IN')}`}</span>
                         </div>
                         {shipping > 0 && (
-                            <p className="text-[10px] text-muted-foreground text-right italic">Free shipping on orders over $100</p>
+                            <p className="text-[10px] text-muted-foreground text-right italic">Free shipping on orders over ₹1,000</p>
                         )}
-                        <Separator />
-                        <div className="flex justify-between items-center font-bold text-lg">
+                        <Separator className="bg-primary/5" />
+                        <div className="flex justify-between items-center font-bold text-xl">
                             <span>Total</span>
-                            <span className="text-primary">${total.toFixed(2)}</span>
+                            <span className="text-primary tracking-tight">₹{total.toLocaleString('en-IN')}</span>
                         </div>
                     </div>
 

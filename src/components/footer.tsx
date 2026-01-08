@@ -3,17 +3,17 @@ import Image from "next/image";
 
 export function Footer() {
     return (
-        <footer className="bg-white border-t border-primary/5 pt-20 pb-12">
+        <footer className="border-t border-primary/5 pt-20 pb-12">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center gap-2 group">
                             <div className="relative w-24 h-24 transition-transform duration-500 group-hover:scale-110">
                                 <Image
-                                    src="/logo.png"
+                                    src="/logo.svg"
                                     alt="Flow Beauty"
                                     fill
-                                    className="object-contain mix-blend-multiply"
+                                    className="object-contain"
                                 />
                             </div>
                         </Link>

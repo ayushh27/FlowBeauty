@@ -20,7 +20,7 @@ export async function GET() {
         ];
 
         const images: Record<string, string[]> = {
-            "Skincare": ["https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop"],
+            "Skincare": ["https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=2070&auto=format&fit=crop"],
             "Makeup": ["https://images.unsplash.com/photo-1586776977607-310e9c725c37?q=80&w=2070&auto=format&fit=crop"],
             "Fragrance": ["https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=2004&auto=format&fit=crop"],
             "Haircare": ["https://images.unsplash.com/photo-1527799822367-31885720493f?q=80&w=1951&auto=format&fit=crop"],

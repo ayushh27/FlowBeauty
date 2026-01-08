@@ -7,13 +7,39 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Login attempt:", { email, password });
+        setIsLoading(true);
+        setError("");
+
+        try {
+            const res = await signIn("credentials", {
+                email,
+                password,
+                redirect: false,
+            });
+
+            if (res?.error) {
+                setError("Invalid email or password");
+            } else {
+                router.push("/");
+                router.refresh();
+            }
+        } catch (err) {
+            setError("An unexpected error occurred");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -58,6 +84,15 @@ export default function LoginPage() {
                     </CardHeader>
                     <CardContent className="px-8 pt-6">
                         <form onSubmit={handleSubmit} className="space-y-6">
+                            {error && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    className="p-3 rounded-2xl bg-destructive/10 text-destructive text-sm font-bold text-center"
+                                >
+                                    {error}
+                                </motion.div>
+                            )}
                             <div className="space-y-2 relative group">
                                 <label className="text-sm font-bold text-primary/60 ml-4 mb-1 block uppercase tracking-wider">Email Address</label>
                                 <Input
@@ -67,6 +102,7 @@ export default function LoginPage() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="rounded-full bg-white/50 border-primary/10 focus:border-primary/40 focus:bg-white h-14 px-6 text-lg transition-all"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                             <div className="space-y-2 relative group">
@@ -83,13 +119,15 @@ export default function LoginPage() {
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="rounded-full bg-white/50 border-primary/10 focus:border-primary/40 focus:bg-white h-14 px-6 text-lg transition-all"
                                     required
+                                    disabled={isLoading}
                                 />
                             </div>
                             <Button
                                 type="submit"
-                                className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-14 text-xl font-bold premium-shadow-hover transition-all border-none mt-4"
+                                disabled={isLoading}
+                                className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-14 text-xl font-bold premium-shadow-hover transition-all border-none mt-4 disabled:opacity-50"
                             >
-                                Login
+                                {isLoading ? "Checking Credentials..." : "Login"}
                             </Button>
                         </form>
                     </CardContent>

@@ -3,6 +3,9 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { PageTransition } from "@/components/page-transition";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { Providers } from "@/components/providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const playfair = Playfair_Display({
@@ -23,11 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <Providers>
+          <ScrollProgress />
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <PageTransition>
+              <main className="flex-1 overflow-hidden">{children}</main>
+            </PageTransition>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

@@ -1,0 +1,75 @@
+<svg width="400" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Flowing droplet/petal icon -->
+  <g filter="url(#shadow)">
+    <!-- Outer droplet -->
+    <path d="M45 25C45 25 25 45 25 65C25 80.464 37.536 93 53 93C68.464 93 81 80.464 81 65C81 45 61 25 61 25C61 25 53 15 45 25Z" fill="url(#gradient1)" opacity="0.8"/>
+    
+    <!-- Inner flowing curves -->
+    <path d="M53 35C53 35 43 48 43 60C43 68.284 49.716 75 58 75C66.284 75 73 68.284 73 60C73 48 63 35 63 35C63 35 58 30 53 35Z" fill="url(#gradient2)" opacity="0.6"/>
+    
+    <!-- Center highlight -->
+    <ellipse cx="58" cy="55" rx="8" ry="12" fill="url(#gradient3)" opacity="0.4"/>
+  </g>
+  
+  <!-- Sparkle accent -->
+  <g transform="translate(75, 20)">
+    <path d="M0,-6 L1,-1 L6,0 L1,1 L0,6 L-1,1 L-6,0 L-1,-1 Z" fill="url(#gradient4)"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFE5EC"/>
+  </g>
+  
+  <!-- FLOW text -->
+  <text x="100" y="55" font-family="Georgia, serif" font-size="48" font-weight="700" fill="url(#textGradient1)" letter-spacing="2">FLOW</text>
+  
+  <!-- BEAUTY text -->
+  <text x="100" y="85" font-family="Georgia, serif" font-size="32" font-weight="400" fill="url(#textGradient2)" letter-spacing="4" opacity="0.9">BEAUTY</text>
+  
+  <!-- Gradients -->
+  <defs>
+    <!-- Icon gradients -->
+    <linearGradient id="gradient1" x1="25" y1="25" x2="81" y2="93" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF8FA3"/>
+      <stop offset="50%" stop-color="#FFB7C5"/>
+      <stop offset="100%" stop-color="#FFC9D9"/>
+    </linearGradient>
+    
+    <linearGradient id="gradient2" x1="43" y1="35" x2="73" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFB7C5"/>
+      <stop offset="100%" stop-color="#FFD5E3"/>
+    </linearGradient>
+    
+    <linearGradient id="gradient3" x1="50" y1="43" x2="66" y2="67" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFD5E3" stop-opacity="0.2"/>
+    </linearGradient>
+    
+    <linearGradient id="gradient4" x1="-6" y1="-6" x2="6" y2="6" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFC9D9"/>
+      <stop offset="100%" stop-color="#FF8FA3"/>
+    </linearGradient>
+    
+    <!-- Text gradients -->
+    <linearGradient id="textGradient1" x1="100" y1="20" x2="280" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8577A"/>
+      <stop offset="50%" stop-color="#FF8FA3"/>
+      <stop offset="100%" stop-color="#FFB7C5"/>
+    </linearGradient>
+    
+    <linearGradient id="textGradient2" x1="100" y1="60" x2="320" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF8FA3"/>
+      <stop offset="100%" stop-color="#FFB7C5"/>
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
